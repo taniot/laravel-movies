@@ -1,0 +1,13 @@
+header {
+    background-color: $primary-background;
+    padding: 1.25rem;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        a {
+            color: $light-text;
+            text-decoration: none;
+        }
+    }
+}

@@ -1,6 +1,6 @@
 @import "~bootstrap/scss/bootstrap";
 
-
-body {
-    background-color: yellow;
-}
+@import "partials/variables";
+@import "partials/typography";
+@import "partials/header";
+@import "partials/footer";

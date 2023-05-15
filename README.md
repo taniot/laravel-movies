@@ -21,12 +21,10 @@ model-migration-seeder-controller
 -- score
 -- image
 
-
-
 - Creare un modello per la gestione dei dati -> Movie
-- Filliamo la tabella con informazioni di Movies o informazioni Fake (faker) - o entrambi
+- Filliamo la tabella con informazioni Fake (faker)
 - Creiamo un controller -> Admin/MovieController - resource controller
-- Creiamo le rotte relative al controlle --resource
+- Creiamo le rotte relative al controller --resource
 
 view
 

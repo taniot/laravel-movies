@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
 use App\Models\Movie;
@@ -15,7 +16,13 @@ class MovieController extends Controller
      */
     public function index()
     {
-        //
+
+        //$movies = Movie::all();
+        $movies = Movie::where('is_deleted', 0)
+                    ->orderBy('score', 'DESC')
+                    ->get();
+
+        return view('movies.index', compact('movies'));
     }
 
     /**
@@ -25,7 +32,7 @@ class MovieController extends Controller
      */
     public function create()
     {
-        //
+        return view('movies.create');
     }
 
     /**
@@ -36,7 +43,17 @@ class MovieController extends Controller
      */
     public function store(StoreMovieRequest $request)
     {
-        //
+
+        $data = $request->validated();
+
+        $newMovie = new Movie();
+        //inserimento dati in tabella
+
+
+        $newMovie->fill($data);
+        $newMovie->save();
+        //non arrivo neanche qui
+        return to_route('movies.index');
     }
 
     /**
@@ -47,7 +64,10 @@ class MovieController extends Controller
      */
     public function show(Movie $movie)
     {
-        //
+
+        //find
+
+        return view('movies.show', compact('movie'));
     }
 
     /**
@@ -58,7 +78,7 @@ class MovieController extends Controller
      */
     public function edit(Movie $movie)
     {
-        //
+        return view('movies.edit', compact('movie'));
     }
 
     /**
@@ -70,7 +90,9 @@ class MovieController extends Controller
      */
     public function update(UpdateMovieRequest $request, Movie $movie)
     {
-        //
+        $data = $request->validated();
+        $movie->update($data);
+        return to_route('movies.index');
     }
 
     /**
@@ -81,6 +103,7 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
-        //
+        $movie->delete();
+        return to_route('movies.index');
     }
 }
