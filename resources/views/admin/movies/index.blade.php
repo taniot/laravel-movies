@@ -3,7 +3,7 @@
 @section('page.main')
     <div class="container">
       <h1>Lista Movies</h1>
-        <a href="{{ route('movies.create') }}" class="btn btn-primary">Create new Movie</a>
+        <a href="{{ route('admin.movies.create') }}" class="btn btn-primary">Create new Movie</a>
        <table class="table">
         <thead>
           <tr>
@@ -26,10 +26,10 @@
             <td>
                 <nav>
                     <ul class="list-unstyled d-flex gap-2">
-                        <li><a href="{{ route('movies.show', $movie->id) }}" class="btn btn-primary">Show</a></li>
-                        <li><a href="{{ route('movies.edit', $movie->id) }}" class="btn btn-secondary">Edit</a></li>
+                        <li><a href="{{ route('admin.movies.show', $movie->id) }}" class="btn btn-primary">Show</a></li>
+                        <li><a href="{{ route('admin.movies.edit', $movie->id) }}" class="btn btn-secondary">Edit</a></li>
                         <li>
-                            <form action="{{ route('movies.destroy', $movie->id) }}" method="POST">
+                            <form action="{{ route('admin.movies.destroy', $movie->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger">Delete</button>

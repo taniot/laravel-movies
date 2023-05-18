@@ -22,7 +22,7 @@ class MovieController extends Controller
                     ->orderBy('score', 'DESC')
                     ->get();
 
-        return view('movies.index', compact('movies'));
+        return view('admin.movies.index', compact('movies'));
     }
 
     /**
@@ -32,7 +32,7 @@ class MovieController extends Controller
      */
     public function create()
     {
-        return view('movies.create');
+        return view('admin.movies.create');
     }
 
     /**
@@ -53,7 +53,7 @@ class MovieController extends Controller
         $newMovie->fill($data);
         $newMovie->save();
         //non arrivo neanche qui
-        return to_route('movies.index');
+        return to_route('admin.movies.index');
     }
 
     /**
@@ -67,7 +67,7 @@ class MovieController extends Controller
 
         //find
 
-        return view('movies.show', compact('movie'));
+        return view('admin.movies.show', compact('movie'));
     }
 
     /**
@@ -78,7 +78,7 @@ class MovieController extends Controller
      */
     public function edit(Movie $movie)
     {
-        return view('movies.edit', compact('movie'));
+        return view('admin.movies.edit', compact('movie'));
     }
 
     /**
@@ -92,7 +92,7 @@ class MovieController extends Controller
     {
         $data = $request->validated();
         $movie->update($data);
-        return to_route('movies.index');
+        return to_route('admin.movies.index');
     }
 
     /**
@@ -104,6 +104,6 @@ class MovieController extends Controller
     public function destroy(Movie $movie)
     {
         $movie->delete();
-        return to_route('movies.index');
+        return to_route('admin.movies.index');
     }
 }
