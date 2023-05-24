@@ -32,6 +32,7 @@ class StoreMovieRequest extends FormRequest
             'production' => 'required|string',
             'director' => 'required|string',
             'genres' => 'required|string',
+            'cover_image' => 'nullable|image|max:2048'
         ];
     }
 

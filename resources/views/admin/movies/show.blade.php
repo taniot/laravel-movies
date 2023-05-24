@@ -8,7 +8,10 @@
             <a href="{{ route('admin.movies.index') }}" class="btn btn-sm btn-primary" alt="Lista Movies">Torna alla lista dei movies</a>
         </div>
 
-
+        @if($movie->cover_image)
+        <img src="{{ asset('storage/'.$movie->cover_image) }}" alt="">
+        <hr>
+        @endif
 
 
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
 use App\Models\Movie;
+use Illuminate\Support\Facades\Storage;
 
 class MovieController extends Controller
 {
@@ -44,13 +45,29 @@ class MovieController extends Controller
     public function store(StoreMovieRequest $request)
     {
 
+
         $data = $request->validated();
 
         $newMovie = new Movie();
         //inserimento dati in tabella
 
+        if(isset($data['cover_image'])){
+            //carichiamo immagine :)
+            // - spostare immagine da folder temporanea a folder "disco"
+            $path_img = Storage::put('uploads/moviestest', $data['cover_image']);
+            // -- nuova path dell'immagine
+            // dd($path_img);
+            // salvare nuova path immagine in tabella -> campo corrispondente
+            $newMovie->cover_image = $path_img;
+        }
+
+
 
         $newMovie->fill($data);
+
+
+
+        //
         $newMovie->save();
         //non arrivo neanche qui
         return to_route('admin.movies.index');
