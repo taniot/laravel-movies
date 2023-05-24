@@ -1,11 +1,16 @@
 header {
     background-color: $primary-background;
     padding: 1.25rem;
+    color: $light-text;
+
+    .navbar-brand  {
+        color: $light-text;
+    }
 
     ul {
         margin: 0;
         padding: 0;
-        a {
+        a.nav-link {
             color: $light-text;
             text-decoration: none;
         }

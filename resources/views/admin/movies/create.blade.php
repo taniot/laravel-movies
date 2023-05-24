@@ -3,6 +3,11 @@
 @section('page.main')
     <div class="container">
 
+        <div class="page-header d-flex justify-content-between align-items-center mb-5">
+            <h1>Create Movie</h1>
+            <a href="{{ route('admin.movies.index') }}" class="btn btn-sm btn-primary" alt="Lista Movies">Torna alla lista dei movies</a>
+        </div>
+
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
