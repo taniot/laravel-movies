@@ -48,6 +48,16 @@
                     value="{{ old('production') }}">
             </div>
             <div class="mb-3">
+                <label for="production" class="form-label">Production</label>
+                <select class="form-select" name="production_id">
+                    <option value="">Select production</option>
+                    @foreach ($productions as $production)
+                        <option value="{{ $production->id }}">{{ $production->name }}</option>
+                    @endforeach
+
+                </select>
+            </div>
+            <div class="mb-3">
                 <label for="director" class="form-label">Director</label>
                 <input type="text" class="form-control" id="director" name="director" value="{{ old('director') }}">
             </div>
@@ -59,6 +69,18 @@
                 <label for="cover_image" class="form-label">Image</label>
                 <input class="form-control" type="file" id="cover_image" name="cover_image">
             </div>
+
+            <div class="mb-3">
+                <div>Actors</div>
+                @foreach ($actors as $actor)
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="actors" value="{{ $actor->id }}" name="actors[]">
+                    <label class="form-check-label" for="actors">{{ $actor->fullname }}</label>
+                  </div>
+                @endforeach
+            </div>
+
+
 
 
             <button type="submit" class="btn btn-primary">Submit</button>

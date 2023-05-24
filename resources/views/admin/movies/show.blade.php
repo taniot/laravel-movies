@@ -5,21 +5,33 @@
 
         <div class="page-header d-flex justify-content-between align-items-center mb-5">
             <h1>Show Movie: {{ $movie->original_title }}</h1>
-            <a href="{{ route('admin.movies.index') }}" class="btn btn-sm btn-primary" alt="Lista Movies">Torna alla lista dei movies</a>
+            <a href="{{ route('admin.movies.index') }}" class="btn btn-sm btn-primary" alt="Lista Movies">Torna alla lista dei
+                movies</a>
         </div>
 
-        @if($movie->cover_image)
-        <img src="{{ asset('storage/'.$movie->cover_image) }}" alt="">
-        <hr>
+        @if ($movie->cover_image)
+            <img src="{{ asset('storage/' . $movie->cover_image) }}" alt="">
+            <hr>
         @endif
 
 
 
-     {{ $movie->description }}
-    <hr>
-    Cast: {{ $movie->cast }}
-    <hr>
-    Genre: {{ $movie->genres }}
+        {{ $movie->description }}
+        <hr>
+        Cast: {{ $movie->cast }}
+        <hr>
+        Genre: {{ $movie->genres }}
+        <hr>
+        Production: {{ $movie->production?->name }}
+        <hr>
+        <ul>
+            @forelse ($movie->actors as $actor)
+                <li>{{ $actor->fullname }}</li>
+            @empty
+                <li>Nessun attore associato a questo film</li>
+            @endforelse
+        </ul>
+
 
 
     </div>

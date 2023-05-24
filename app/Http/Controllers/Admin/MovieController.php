@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
+use App\Models\Actor;
 use App\Models\Movie;
+use App\Models\Production;
 use Illuminate\Support\Facades\Storage;
 
 class MovieController extends Controller
@@ -33,7 +35,15 @@ class MovieController extends Controller
      */
     public function create()
     {
-        return view('admin.movies.create');
+
+        $data = [
+            'productions' => Production::all()->sortBy('name'),
+            'actors' => Actor::all()->sortBy('fullname')
+        ];
+
+
+
+        return view('admin.movies.create', $data);
     }
 
     /**
@@ -44,7 +54,6 @@ class MovieController extends Controller
      */
     public function store(StoreMovieRequest $request)
     {
-
 
         $data = $request->validated();
 
@@ -62,14 +71,21 @@ class MovieController extends Controller
         }
 
 
+        if(isset($data['production_id'])){
+            $newMovie->production_id = $data['production_id'];
+        }
+
+
+        $actors = isset($data['actors']) ? $data['actors'] : [];
+
 
         $newMovie->fill($data);
-
-
-
-        //
+        //ID del movie è NON è ESISTENTE
         $newMovie->save();
-        //non arrivo neanche qui
+
+        //ID del movie è ESISTENTE
+        $newMovie->actors()->sync($actors);
+
         return to_route('admin.movies.index');
     }
 

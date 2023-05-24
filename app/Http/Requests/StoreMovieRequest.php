@@ -29,10 +29,11 @@ class StoreMovieRequest extends FormRequest
             'year' => 'required|integer|digits:4|min:1890|max:'.date('Y'),
             'country' => 'required|string|max:2|uppercase',
             'cast' => 'required|string',
-            'production' => 'required|string',
             'director' => 'required|string',
             'genres' => 'required|string',
-            'cover_image' => 'nullable|image|max:2048'
+            'cover_image' => 'nullable|image|max:2048',
+            'production_id' => 'nullable|exists:productions,id',
+            'actors' => 'nullable|exists:actors,id'
         ];
     }
 
